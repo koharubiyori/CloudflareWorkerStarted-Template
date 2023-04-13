@@ -1,0 +1,39 @@
+{
+  "name": "cloudflare-worker-project",
+  "version": "1.0.0",
+  "license": "MIT",
+  "module": "./dist/worker.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "node ./config/webpack.server.js",
+    "mf": "miniflare ./dist/worker.js --watch --debug --modules",
+    "build": "npx cross-env NODE_ENV=production webpack --config config/webpack.prod.conf.js",
+    "cfw-publish": "npm run build && npx wrangler publish",
+    "debug": "node --inspect-brk ./node_modules/webpack/bin/webpack.js --config config/webpack.prod.conf.js --node-env production",
+    "debug:serve": "node --inspect-brk ./node_modules/webpack/bin/webpack.js serve --config config/webpack.prod.conf.js --node-env development",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
+  },
+  "dependencies": {
+    "hono": "^3.1.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@cloudflare/workers-types": "^4.20230404.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "core-js": "^3.30.0",
+    "cross-env": "^7.0.2",
+    "express": "^4.18.2",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3",
+    "miniflare": "^2.13.0",
+    "wrangler": "^2.15.0"
+  }
+}
